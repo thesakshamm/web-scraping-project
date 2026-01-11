@@ -13,16 +13,18 @@ import csv
 
 url = "https://chukul.com/api/data/v2/daily-stock/"
 response = requests.get(url)
-data = response.json()
+#data = response.json()
 
-with open("stocks.csv", "w", newline="", encoding="utf-8") as f:
+
+# Column headers
+fields = ['Symbol', 'LTP', 'Percentage Change', 'Volume']
+
+# Data rows
+rows = response.json()
+
+# Writing to a CSV file
+with open('data.csv', 'w', newline='') as f:
     writer = csv.writer(f)
-
-    # header (you decide meaning of each index)
-    writer.writerow(["symbol", "ltp", "percentageChange", "volume"])
-
-    for row in data:
-        writer.writerow(row)
-
-    
+    writer.writerow(fields)     # Write header
+    writer.writerows(rows)      # Write data rows    
 
