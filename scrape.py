@@ -27,4 +27,12 @@ with open("data.csv", "w", newline="") as f:
 db = mysql.connector.connect(host="localhost", username="root", database="stocks_data")
 
 
-print(db)
+terminal = db.cursor()
+sql = "INSERT into stocks1 (sym,ltp,percentage_change,volume) VALUES (%s, %s,%s ,%s)"
+
+
+# sql execution
+
+terminal.executemany(sql, data_to_dump)
+db.commit()
+db.close()
