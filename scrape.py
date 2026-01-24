@@ -33,6 +33,11 @@ sql = "INSERT into stocks1 (sym,ltp,percentage_change,volume) VALUES (%s, %s,%s 
 
 # sql execution
 
+
+terminal.execute("TRUNCATE TABLE stocks1;")
+db.commit()
+
 terminal.executemany(sql, data_to_dump)
+
 db.commit()
 db.close()
