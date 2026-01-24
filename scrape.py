@@ -5,6 +5,7 @@ response = requests.get(url = url)
 data = response.json()
 """
 
+import mysql.connector
 import requests
 import csv
 
@@ -22,3 +23,8 @@ with open("data.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(headers)
     writer.writerows(data_to_dump)
+
+db = mysql.connector.connect(host="localhost", username="root", database="stocks_data")
+
+
+print(db)
