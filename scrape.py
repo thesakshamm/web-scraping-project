@@ -38,6 +38,14 @@ terminal.execute("TRUNCATE TABLE stocks1;")
 db.commit()
 
 terminal.executemany(sql, data_to_dump)
-
 db.commit()
+
+stock_symbol = (input("Enter the stock symbol: ")).upper()
+terminal.execute("SELECT * FROM stocks1 WHERE sym = %s;", (stock_symbol,))
+result = terminal.fetchone()
+if result:
+    print(f"Data for {stock_symbol}: {result}")
+else:
+    f"no data found for {stock_symbol}"
+
 db.close()
